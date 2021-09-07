@@ -1,26 +1,37 @@
-.react-bootstrap-table .row-expand-slide-exit-active {
+.posts .react-bootstrap-table .row-expand-slide-exit-active {
     max-height: 0;
     overflow: hidden;
     transition: none !important; }
 
-.react-bootstrap-table .row-expand-slide-appear-active {
+.posts .react-bootstrap-table .row-expand-slide-appear-active {
     max-height: 100vh;
     transition: none !important; }
 
-.react-bootstrap-table-pagination-total {
+.posts .react-bootstrap-table-pagination-total {
     margin-left: 10px;
 }
 
-.col-md-6 {
+.posts .col-md-6 {
     text-align: left;
+    margin: 0px !important;
 }
 
-.react-bootstrap-table-page-btns-ul{
+.posts .react-bootstrap-table-pagination-list {
+    margin: 0px !important;
+}
+
+.posts .react-bootstrap-table-page-btns-ul{
     float: right;
+    margin-right: 5px;
 }
 
-.page-link, .dropdown-toggle, .active{
+.posts .page-link, .dropdown-toggle, .active{
     border-color: black !important;
     background-color: lightgray !important;
     color: black !important;
+}
+
+.posts .react-bootstrap-table{
+    border: 5px solid darkgray !important;
+    margin: 5px 5px 5px 5px !important;
 }

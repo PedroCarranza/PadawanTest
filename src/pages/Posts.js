@@ -6,11 +6,10 @@ import BootstrapTable from "react-bootstrap-table-next";
 import 'bootstrap/dist/css/bootstrap.css';
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 import paginationFactory from 'react-bootstrap-table2-paginator';
+import options from "../configs/Options";
 
 function Posts() {
     const [data, setData] = useState([]);
-    const [innerPostData, setInnerPostData] = useState([]);
-    const [innerCommentsData, setInnerCommentsData] = useState([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(async () => {
@@ -61,25 +60,27 @@ function Posts() {
     }, []);
 
     function showDataComments(row) {
+        let returnData = [];
+
         data.find((obj) => {
             obj.postsList.find((internalObj) => {
                 if (internalObj.id === row.id) {
-                    setInnerCommentsData(internalObj.commentsList);
+                    returnData = internalObj.commentsList;
                     return true;
                 }
             })
         })
+        return returnData;
     }
 
     const expandInternalRow = {
         onlyOneExpanding: true,
         renderer: row => (
             <>
-                {showDataComments(row)}
                 <h2>Comentários no post</h2>
                 <BootstrapTable
                     keyField="id"
-                    data={innerCommentsData}
+                    data={showDataComments(row)}
                     columns={[
                         {
                             dataField: 'name',
@@ -114,31 +115,32 @@ function Posts() {
                     noDataIndication="Não há dados"
                     condensed={true}
                     rowStyle={{ backgroundColor: 'lightgray', border: '2px solid black' }}
-                    pagination={innerCommentsData.length > 10 && paginationFactory()}
                 />
             </>
         ),
     };
 
     function showDataPosts(row) {
+        let returnData = [];
+
         data.find((obj) => {
             if (obj.id === row.id) {
-                setInnerPostData(obj.postsList);
+                returnData = obj.postsList;
                 return true;
             }
         })
-        return [];
+        return returnData;
     }
 
     const expandRow = {
         onlyOneExpanding: true,
         renderer: row => (
             <>
-                {showDataPosts(row)}
                 <h2>Posts feitos</h2>
                 <BootstrapTable
+                    className="test"
                     keyField="id"
-                    data={innerPostData}
+                    data={showDataPosts(row)}
                     columns={[
                         {
                             dataField: 'title',
@@ -165,53 +167,17 @@ function Posts() {
                     noDataIndication="Não há dados"
                     condensed={true}
                     rowStyle={{ backgroundColor: 'lightgray', border: '2px solid black' }}
-                    pagination={innerPostData.length > 10 && paginationFactory()}
+                    pagination={paginationFactory(options)}
                 />
             </>
         ),
-    };
-
-    const customTotal = (from, to, size) => (
-        <span className="react-bootstrap-table-pagination-total">
-            Mostrando do {from} ao {to} de {size} resultados
-        </span>
-    );
-
-    const options = {
-        pageStartIndex: 1,
-        alwaysShowAllBtns: false, // Always show next and previous button
-        hidePageListOnlyOnePage: true, // Hide the pagination list when only one page
-        firstPageText: 'Primeira',
-        prePageText: 'Anterior',
-        nextPageText: 'Próxima',
-        lastPageText: 'Última',
-        nextPageTitle: 'Próxima página',
-        prePageTitle: 'Página anterior',
-        firstPageTitle: 'Primeira página',
-        lastPageTitle: 'Última página',
-        showTotal: true,
-        paginationTotalRenderer: customTotal,
-        disablePageTitle: true,
-        sizePerPageList: [{
-            text: '4', value: 4
-        },
-        {
-            text: '8', value: 8
-        },
-        {
-            text: '12', value: 12
-        },
-        {
-            text: 'Tudo', value: data.length
-        }
-        ]
     };
 
     return (
         <>
             {loading && <ReactLoading type={"cubes"} color={"red"} height={667} width={375} />}
             {!loading &&
-                <>
+                <div className="posts">
                     <h2>Usuários</h2>
                     <BootstrapTable
                         keyField="id"
@@ -244,7 +210,7 @@ function Posts() {
                         rowStyle={{ backgroundColor: 'lightgray', border: '2px solid black' }}
                         pagination={paginationFactory(options)}
                     />
-                </>
+                </div>
             }
         </>
     );
