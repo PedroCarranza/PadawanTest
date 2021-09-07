@@ -37,6 +37,7 @@ function Albums() {
             });
         }
 
+        // Get all users available
         let usersList = [];
         await fetch("https://jsonplaceholder.typicode.com/users")
             .then(response => response.json())
@@ -75,7 +76,7 @@ function Albums() {
 
     function urlFormatter(cell, row) {
         return (
-            <img src={cell} />
+            <img src={cell} style={{ maxWidth: '25%' }} />
         );
     }
 
@@ -92,8 +93,8 @@ function Albums() {
                             dataField: 'title',
                             text: 'Título',
                             headerStyle: {
-                                backgroundColor: 'black',
-                                color: "white"
+                                backgroundColor: 'plum',
+                                color: "black"
                             },
                             sort: true,
                         },
@@ -101,17 +102,18 @@ function Albums() {
                             dataField: 'url',
                             text: 'Url',
                             headerStyle: {
-                                backgroundColor: 'black',
-                                color: "white"
+                                backgroundColor: 'plum',
+                                color: "black"
                             },
                             sort: true,
+                            formatter: urlFormatter
                         },
                         {
                             dataField: 'thumbnailUrl',
                             text: 'ThumbnailUrl',
                             headerStyle: {
-                                backgroundColor: 'black',
-                                color: "white"
+                                backgroundColor: 'plum',
+                                color: "black"
                             },
                             sort: true,
                             formatter: urlFormatter
@@ -121,10 +123,27 @@ function Albums() {
                     bootstrap4={true}
                     noDataIndication="Não há dados"
                     condensed={true}
-                    rowStyle={{ backgroundColor: 'lightgray', border: '2px solid black' }}
+                    rowStyle={{ backgroundColor: '#f1daf1', border: '2px solid #d0c7d0' }}
                 />
             </>
         ),
+        showExpandColumn: true,
+        expandHeaderColumnRenderer: ({ isAnyExpands }) => {
+            if (isAnyExpands) {
+                return <b>-</b>;
+            }
+            return <b>...</b>;
+        },
+        expandColumnRenderer: ({ expanded }) => {
+            if (expanded) {
+                return (
+                    <b>▲</b>
+                );
+            }
+            return (
+                <b>▼</b>
+            );
+        },
     };
 
     function showDataAlbums(row) {
@@ -152,8 +171,8 @@ function Albums() {
                             dataField: 'title',
                             text: 'Título',
                             headerStyle: {
-                                backgroundColor: 'black',
-                                color: "white"
+                                backgroundColor: 'plum',
+                                color: "black"
                             },
                             sort: true,
                         }
@@ -163,17 +182,34 @@ function Albums() {
                     bootstrap4={true}
                     noDataIndication="Não há dados"
                     condensed={true}
-                    rowStyle={{ backgroundColor: 'lightgray', border: '2px solid black' }}
+                    rowStyle={{ backgroundColor: '#f1daf1', border: '2px solid #d0c7d0' }}
                     pagination={paginationFactory(options)}
                 />
             </>
         ),
+        showExpandColumn: true,
+        expandHeaderColumnRenderer: ({ isAnyExpands }) => {
+            if (isAnyExpands) {
+                return <b>-</b>;
+            }
+            return <b>...</b>;
+        },
+        expandColumnRenderer: ({ expanded }) => {
+            if (expanded) {
+                return (
+                    <b>▲</b>
+                );
+            }
+            return (
+                <b>▼</b>
+            );
+        },
     };
 
     return (
         <>
             {loading && <ReactLoading type={"cubes"} color={"red"} height={667} width={375} />}
-            {!loading && <div className="posts">
+            {!loading && <div className="albums">
                 <h2>Usuários</h2>
                 <BootstrapTable
                     keyField="id"
@@ -183,8 +219,8 @@ function Albums() {
                             dataField: 'name',
                             text: 'Nome',
                             headerStyle: {
-                                backgroundColor: 'black',
-                                color: "white"
+                                backgroundColor: 'plum',
+                                color: "black"
                             },
                             sort: true,
                         },
@@ -192,8 +228,8 @@ function Albums() {
                             dataField: 'username',
                             text: "Nome de usuário",
                             headerStyle: {
-                                backgroundColor: 'black',
-                                color: "white"
+                                backgroundColor: 'plum',
+                                color: "black"
                             },
                             sort: true,
                         }
@@ -203,7 +239,7 @@ function Albums() {
                     bootstrap4={true}
                     noDataIndication="Não há dados"
                     condensed={true}
-                    rowStyle={{ backgroundColor: 'lightgray', border: '2px solid black' }}
+                    rowStyle={{ backgroundColor: '#f1daf1', border: '2px solid #d0c7d0' }}
                     pagination={paginationFactory(options)}
                 />
             </div>}

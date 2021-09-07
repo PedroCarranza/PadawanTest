@@ -37,6 +37,7 @@ function Posts() {
             });
         }
 
+        // Get all users available
         let usersList = [];
         await fetch("https://jsonplaceholder.typicode.com/users")
             .then(response => response.json())
@@ -118,6 +119,23 @@ function Posts() {
                 />
             </>
         ),
+        showExpandColumn: true,
+        expandHeaderColumnRenderer: ({ isAnyExpands }) => {
+            if (isAnyExpands) {
+                return <b>-</b>;
+            }
+            return <b>...</b>;
+        },
+        expandColumnRenderer: ({ expanded }) => {
+            if (expanded) {
+                return (
+                    <b>▲</b>
+                );
+            }
+            return (
+                <b>▼</b>
+            );
+        },
     };
 
     function showDataPosts(row) {
@@ -171,7 +189,25 @@ function Posts() {
                 />
             </>
         ),
+        showExpandColumn: true,
+        expandHeaderColumnRenderer: ({ isAnyExpands }) => {
+            if (isAnyExpands) {
+                return <b>-</b>;
+            }
+            return <b>...</b>;
+        },
+        expandColumnRenderer: ({ expanded }) => {
+            if (expanded) {
+                return (
+                    <b>▲</b>
+                );
+            }
+            return (
+                <b>▼</b>
+            );
+        },
     };
+
 
     return (
         <>

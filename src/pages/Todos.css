@@ -1,0 +1,20 @@
+.todos {
+    margin-top: 10px;
+}
+
+.todos .page-link, .todos .dropdown-toggle, .todos .active{
+    border-color: gray !important;
+    background-color: #ffcc99 !important;
+    color: gray !important;
+}
+
+.todos .expand-cell-header{
+    background-color: black !important;
+    color: white !important;
+}
+
+.todos .react-bootstrap-table{
+    border: 3px solid #ffcc99 !important;
+    margin: 3px !important;
+    padding: 3px !important;
+}

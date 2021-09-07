@@ -1,37 +1,20 @@
-.posts .react-bootstrap-table .row-expand-slide-exit-active {
-    max-height: 0;
-    overflow: hidden;
-    transition: none !important; }
-
-.posts .react-bootstrap-table .row-expand-slide-appear-active {
-    max-height: 100vh;
-    transition: none !important; }
-
-.posts .react-bootstrap-table-pagination-total {
-    margin-left: 10px;
+.posts {
+    margin-top: 10px;
 }
 
-.posts .col-md-6 {
-    text-align: left;
-    margin: 0px !important;
-}
-
-.posts .react-bootstrap-table-pagination-list {
-    margin: 0px !important;
-}
-
-.posts .react-bootstrap-table-page-btns-ul{
-    float: right;
-    margin-right: 5px;
-}
-
-.posts .page-link, .dropdown-toggle, .active{
+.posts .page-link, .posts .dropdown-toggle, .posts .active{
     border-color: black !important;
     background-color: lightgray !important;
     color: black !important;
 }
 
+.posts .expand-cell-header{
+    background-color: black !important;
+    color: white !important;
+}
+
 .posts .react-bootstrap-table{
-    border: 5px solid darkgray !important;
-    margin: 5px 5px 5px 5px !important;
+    border: 3px solid darkgray !important;
+    margin: 3px !important;
+    padding: 3px !important;
 }

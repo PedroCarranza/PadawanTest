@@ -1,0 +1,20 @@
+.albums {
+    margin-top: 10px;
+}
+
+.albums .page-link, .albums .dropdown-toggle, .albums .active{
+    border-color: gray !important;
+    background-color: plum !important;
+    color: gray !important;
+}
+
+.albums .expand-cell-header{
+    background-color: plum !important;
+    color: black !important;
+}
+
+.albums .react-bootstrap-table{
+    border: 3px solid plum !important;
+    margin: 3px !important;
+    padding: 3px !important;
+}

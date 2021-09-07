@@ -1,0 +1,55 @@
+.navbar {
+    background: linear-gradient(90deg, purple 0%, white 100%);
+    height: 60px;
+    display: flex;
+    justify-content: left;
+    align-items: left;
+    font-size: 18px;
+}
+
+.navbarLogo {
+    color: #fff;
+    border: 4px solid transparent;
+    border-radius: 4px;
+    justify-self: start;
+    margin-left: 40px;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 26px;
+}
+
+.navbarLogo:hover{
+    color: plum;
+    background-color: white;
+    transition: all 0.2s ease-out;
+}
+
+.navMenu {
+    display: flex;
+    list-style: none;
+    text-align: center;
+    width: 10vw;
+    margin: 0px;
+}
+
+.navItem {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding: 0px;
+    padding-left: 16px;
+    border-radius: 4px;
+}
+
+.navLinks {
+    border: 10px solid transparent;
+    border-radius: 4px;
+    color: purple;
+    text-decoration: none;
+}
+
+.navLinks:hover{
+    color: white;
+    background-color: plum;
+    transition: all 0.2s ease-out;
+}

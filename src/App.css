@@ -1,10 +1,117 @@
 .App {
-  text-align: center;
-  height: 100vh;
-  overflow: auto;
+    text-align: center;
+    height: 100vh;
+    overflow: auto;
+}
+
+.App .outer {
+  display: table;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+}
+
+.App .middle {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.App .inner {
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%
+  /* Whatever width you want */
+}
+
+.App .outer h3{
+    margin-top: 10px;
+}
+
+.App .outer a:link{
+    color: purple;
+    background-color: transparent;
+    text-decoration: none;
+}
+
+.App .outer a:visited {
+    color: plum;
+    background-color: transparent;
+    text-decoration: none;
+}
+
+.App .outer a:hover {
+    color: purple;
+    background-color: transparent;
+    text-decoration: underline;
+}
+
+.App .outer a:active {
+    color: plum;
+    background-color: transparent;
+    text-decoration: underline;
+}
+
+.App .outer button{
+    border-color: #f1daf1;
+    color: white; 
+    background-color: plum;
+    height: 50px;
+    font-size: 20px;
+}
+
+.App .outer button:hover{
+    border-color: purple;
+}
+
+.App .outer button:hover{
+    height: 50px;
+}
+
+
+.App .outer .buttons{
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    grid-gap: 20px;
+}
+
+.App .outer .postsButton{
+    margin-left: 10px;
+}
+
+.App .outer .todosButton{
+    margin-right: 10px;
 }
 
 ::-webkit-scrollbar {
     width: 0;  /* Remove scrollbar space */
     background: transparent;  /* Optional: just make scrollbar invisible */
+}
+
+.react-bootstrap-table .row-expand-slide-exit-active {
+    max-height: 0;
+    overflow: hidden;
+    transition: none !important; }
+
+.react-bootstrap-table .row-expand-slide-appear-active {
+    max-height: 100vh;
+    transition: none !important; }
+
+.react-bootstrap-table-pagination-total {
+    margin-left: 10px;
+}
+
+.col-md-6 {
+    text-align: left;
+    margin: 0px !important;
+}
+
+.react-bootstrap-table-pagination-list {
+    margin: 0px !important;
+}
+
+.react-bootstrap-table-page-btns-ul{
+    float: right;
+    margin-right: 5px;
 }

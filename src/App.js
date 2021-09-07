@@ -1,5 +1,7 @@
-import { BrowserRouter, Route, useHistory } from 'react-router-dom';
+import { Route, useHistory } from 'react-router-dom';
 import './App.css';
+
+import Nav from "./components/Nav"
 
 import Posts from "./pages/Posts"
 import Albums from './pages/Albums';
@@ -11,13 +13,35 @@ function App() {
   return (
     <div className="App">
       <Route path="/" exact>
-        <button className="posts" onClick={() => history.push("/posts")}>Postagens</button>
-        <button className="albums" onClick={() => history.push("/albums")}>Albuns</button>
-        <button className="todos" onClick={() => history.push("/todos")}>To-Dos</button>
+        <div className="outer">
+          <div className="middle">
+            <div className="inner">
+              <h3>Vamos utilizar a API presente em <tab />
+                <a href="https://jsonplaceholder.typicode.com">Json Placeholder</a>
+                <br /> Para isso escolha qual das opções abaixo gostaria de acessar:
+              </h3>
+              <div className="buttons">
+                <button className="postsButton" onClick={() => history.push("/posts")}>Postagens</button>
+                <button className="albumsButton" onClick={() => history.push("/albums")}>Albuns</button>
+                <button className="todosButton" onClick={() => history.push("/todos")}>To-Dos</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </Route>
-      <Route path="/posts" component={Posts} />
-      <Route path="/albums" component={Albums} />
-      <Route path="/todos" component={Todos} />
+      <Route path="/posts">
+        {Nav()}
+        {Posts()}
+      </Route>
+      <Route path="/albums">
+        {Nav()}
+        {Albums()}
+      </Route>
+      <Route path="/todos">
+        {Nav()}
+        {Todos()}
+      </Route>
     </div>
   );
 }
