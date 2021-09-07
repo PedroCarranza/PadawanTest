@@ -1,0 +1,26 @@
+.react-bootstrap-table .row-expand-slide-exit-active {
+    max-height: 0;
+    overflow: hidden;
+    transition: none !important; }
+
+.react-bootstrap-table .row-expand-slide-appear-active {
+    max-height: 100vh;
+    transition: none !important; }
+
+.react-bootstrap-table-pagination-total {
+    margin-left: 10px;
+}
+
+.col-md-6 {
+    text-align: left;
+}
+
+.react-bootstrap-table-page-btns-ul{
+    float: right;
+}
+
+.page-link, .dropdown-toggle, .active{
+    border-color: black !important;
+    background-color: lightgray !important;
+    color: black !important;
+}

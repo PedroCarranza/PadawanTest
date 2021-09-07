@@ -15,8 +15,8 @@ function App() {
           <button className="todos" onClick={() => window.location.replace("/todos")}>To-Dos</button>
         </Route>
         <Route path="/posts" component={Posts} />
-        <Route path="/posts" component={Albums} />
-        <Route path="/posts" component={Todos} />
+        <Route path="/albums" component={Albums} />
+        <Route path="/todos" component={Todos} />
       </BrowserRouter>
     </div>
   );
