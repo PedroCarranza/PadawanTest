@@ -7,10 +7,13 @@ import 'bootstrap/dist/css/bootstrap.css';
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 import paginationFactory from 'react-bootstrap-table2-paginator';
 import options from "../configs/Options";
+import 'react-bootstrap-table2-toolkit/dist/react-bootstrap-table2-toolkit.min.css';
+import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
 
 function Albums() {
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(true);
+    const { SearchBar } = Search;
 
     useEffect(async () => {
         // Get all photos available
@@ -55,7 +58,7 @@ function Albums() {
             })
         }
 
-        setData(usersList)
+        setData(usersList);
 
         setLoading(false);
     }, []);
@@ -84,8 +87,8 @@ function Albums() {
         onlyOneExpanding: true,
         renderer: row => (
             <>
-                <h2>Comentários no post</h2>
-                <BootstrapTable
+                <h2>Imagens no álbum</h2>
+                <ToolkitProvider
                     keyField="id"
                     data={showDataPhotos(row)}
                     columns={[
@@ -106,7 +109,8 @@ function Albums() {
                                 color: "black"
                             },
                             sort: true,
-                            formatter: urlFormatter
+                            formatter: urlFormatter,
+                            searchable: false,
                         },
                         {
                             dataField: 'thumbnailUrl',
@@ -116,15 +120,32 @@ function Albums() {
                                 color: "black"
                             },
                             sort: true,
-                            formatter: urlFormatter
+                            formatter: urlFormatter,
+                            searchable: false,
                         }
                     ]}
-                    bordered={true}
-                    bootstrap4={true}
-                    noDataIndication="Não há dados"
-                    condensed={true}
-                    rowStyle={{ backgroundColor: '#f1daf1', border: '2px solid #d0c7d0' }}
-                />
+                    search
+                >
+                    {props => (
+                        <>
+                            <SearchBar
+                                {...props.searchProps}
+                                style={{ color: 'black', marginLeft: '3px', width: '99.5%' }}
+                                placeholder="Pesquise as imagens"
+                            />
+                            <BootstrapTable
+                                {...props.baseProps}
+                                bordered={true}
+                                bootstrap4={true}
+                                noDataIndication="Não há dados"
+                                condensed={true}
+                                rowStyle={{ backgroundColor: '#f1daf1', border: '2px solid #d0c7d0' }}
+                            />
+                        </>
+                    )
+                    }
+                </ToolkitProvider>
+
             </>
         ),
         showExpandColumn: true,
@@ -163,7 +184,7 @@ function Albums() {
         renderer: row => (
             <>
                 <h2>Álbuns criados</h2>
-                <BootstrapTable
+                <ToolkitProvider
                     keyField="id"
                     data={showDataAlbums(row)}
                     columns={[
@@ -177,14 +198,32 @@ function Albums() {
                             sort: true,
                         }
                     ]}
-                    expandRow={expandInternalRow}
-                    bordered={true}
-                    bootstrap4={true}
-                    noDataIndication="Não há dados"
-                    condensed={true}
-                    rowStyle={{ backgroundColor: '#f1daf1', border: '2px solid #d0c7d0' }}
-                    pagination={paginationFactory(options)}
-                />
+                    search
+                >
+                    {
+                        props => (
+                            <>
+                                <SearchBar
+                                    {...props.searchProps}
+                                    style={{ color: 'black', marginLeft: '3px', width: '99.5%' }}
+                                    placeholder="Pesquise os álbuns"
+                                />
+                                <BootstrapTable
+
+                                    {...props.baseProps}
+                                    expandRow={expandInternalRow}
+                                    bordered={true}
+                                    bootstrap4={true}
+                                    noDataIndication="Não há dados"
+                                    condensed={true}
+                                    rowStyle={{ backgroundColor: '#f1daf1', border: '2px solid #d0c7d0' }}
+                                    pagination={paginationFactory(options)}
+                                />
+                            </>
+                        )
+                    }
+                </ToolkitProvider>
+
             </>
         ),
         showExpandColumn: true,
@@ -211,7 +250,7 @@ function Albums() {
             {loading && <ReactLoading type={"cubes"} color={"red"} height={667} width={375} />}
             {!loading && <div className="albums">
                 <h2>Usuários</h2>
-                <BootstrapTable
+                <ToolkitProvider
                     keyField="id"
                     data={data}
                     columns={[
@@ -234,14 +273,32 @@ function Albums() {
                             sort: true,
                         }
                     ]}
-                    expandRow={expandRow}
-                    bordered={false}
-                    bootstrap4={true}
-                    noDataIndication="Não há dados"
-                    condensed={true}
-                    rowStyle={{ backgroundColor: '#f1daf1', border: '2px solid #d0c7d0' }}
-                    pagination={paginationFactory(options)}
-                />
+                    search
+                >
+                    {
+                        props => (
+                            <>
+                                <SearchBar
+                                    {...props.searchProps}
+                                    style={{ color: 'black', marginLeft: '3px', width: '99.5%' }}
+                                    placeholder="Pesquise os usuários"
+                                    delay={250}
+                                />
+                                <BootstrapTable
+                                    {...props.baseProps}
+                                    expandRow={expandRow}
+                                    bordered={false}
+                                    bootstrap4={true}
+                                    noDataIndication="Não há dados"
+                                    condensed={true}
+                                    rowStyle={{ backgroundColor: '#f1daf1', border: '2px solid #d0c7d0' }}
+                                    pagination={paginationFactory(options)}
+                                />
+                            </>
+                        )
+                    }
+
+                </ToolkitProvider>
             </div>}
         </>
     );

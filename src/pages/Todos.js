@@ -7,10 +7,13 @@ import 'bootstrap/dist/css/bootstrap.css';
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 import paginationFactory from 'react-bootstrap-table2-paginator';
 import options from "../configs/Options";
+import 'react-bootstrap-table2-toolkit/dist/react-bootstrap-table2-toolkit.min.css';
+import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
 
 function Todos() {
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(true);
+    const { SearchBar } = Search;
 
     useEffect(async () => {
         // Get all todos available
@@ -37,7 +40,7 @@ function Todos() {
             })
         }
 
-        setData(usersList)
+        setData(usersList);
 
         setLoading(false);
     }, []);
@@ -81,7 +84,7 @@ function Todos() {
         renderer: row => (
             <>
                 <h2>TO-DOs</h2>
-                <BootstrapTable
+                <ToolkitProvider
                     keyField="id"
                     data={showDataTodos(row)}
                     columns={[
@@ -102,16 +105,32 @@ function Todos() {
                                 color: "white"
                             },
                             sort: true,
-                            formatter: checkFormatter
+                            formatter: checkFormatter,
+                            searchable: false,
                         }
                     ]}
-                    bordered={true}
-                    bootstrap4={true}
-                    noDataIndication="Não há dados"
-                    condensed={true}
-                    rowStyle={innerRowStyle}
-                    pagination={paginationFactory(options)}
-                />
+                    search
+                >
+                    {props => (
+                        <>
+                            <SearchBar
+                                {...props.searchProps}
+                                style={{ color: 'black', marginLeft: '3px', width: '99.5%' }}
+                                placeholder="Pesquise os TO-DOs"
+                                delay={250}
+                            />
+                            <BootstrapTable
+                                {...props.baseProps}
+                                bordered={true}
+                                bootstrap4={true}
+                                noDataIndication="Não há dados"
+                                condensed={true}
+                                rowStyle={innerRowStyle}
+                                pagination={paginationFactory(options)}
+                            />
+                        </>
+                    )}
+                </ToolkitProvider>
             </>
         ),
         showExpandColumn: true,
@@ -138,7 +157,7 @@ function Todos() {
             {loading && <ReactLoading type={"cubes"} color={"red"} height={667} width={375} />}
             {!loading && <div className="todos">
                 <h2>Usuários</h2>
-                <BootstrapTable
+                <ToolkitProvider
                     keyField="id"
                     data={data}
                     columns={[
@@ -161,15 +180,31 @@ function Todos() {
                             sort: true,
                         }
                     ]}
-                    expandRow={expandRow}
-                    bordered={false}
-                    bootstrap4={true}
-                    noDataIndication="Não há dados"
-                    condensed={true}
-                    rowStyle={{ backgroundColor: '#ffffcc', border: '2px solid black' }}
-                    pagination={paginationFactory(options)}
-                />
-            </div>}
+                    search
+                >
+                    {props => (
+                        <>
+                            <SearchBar
+                                {...props.searchProps}
+                                style={{ color: 'black', marginLeft: '3px', width: '99.5%' }}
+                                placeholder="Pesquise os usuários"
+                                delay={250}
+                            />
+                            <BootstrapTable
+                                {...props.baseProps}
+                                expandRow={expandRow}
+                                bordered={false}
+                                bootstrap4={true}
+                                noDataIndication="Não há dados"
+                                condensed={true}
+                                rowStyle={{ backgroundColor: '#ffffcc', border: '2px solid black' }}
+                                pagination={paginationFactory(options)}
+                            />
+                        </>
+                    )}
+                </ToolkitProvider>
+            </div>
+            }
         </>
     );
 }

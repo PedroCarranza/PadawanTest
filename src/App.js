@@ -16,14 +16,14 @@ function App() {
         <div className="outer">
           <div className="middle">
             <div className="inner">
-              <h3>Vamos utilizar a API presente em <tab />
+              <h3>Vamos utilizar a API presente em&nbsp;
                 <a href="https://jsonplaceholder.typicode.com">Json Placeholder</a>
                 <br /> Para isso escolha qual das opções abaixo gostaria de acessar:
               </h3>
               <div className="buttons">
                 <button className="postsButton" onClick={() => history.push("/posts")}>Postagens</button>
-                <button className="albumsButton" onClick={() => history.push("/albums")}>Albuns</button>
-                <button className="todosButton" onClick={() => history.push("/todos")}>To-Dos</button>
+                <button className="albumsButton" onClick={() => history.push("/albums")}>Álbuns</button>
+                <button className="todosButton" onClick={() => history.push("/todos")}>TO-DOs</button>
               </div>
             </div>
           </div>

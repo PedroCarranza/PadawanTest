@@ -7,10 +7,13 @@ import 'bootstrap/dist/css/bootstrap.css';
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 import paginationFactory from 'react-bootstrap-table2-paginator';
 import options from "../configs/Options";
+import 'react-bootstrap-table2-toolkit/dist/react-bootstrap-table2-toolkit.min.css';
+import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
 
 function Posts() {
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(true);
+    const { SearchBar } = Search;
 
     useEffect(async () => {
         // Get all comments available
@@ -55,7 +58,7 @@ function Posts() {
             })
         }
 
-        setData(usersList)
+        setData(usersList);
 
         setLoading(false);
     }, []);
@@ -79,7 +82,7 @@ function Posts() {
         renderer: row => (
             <>
                 <h2>Comentários no post</h2>
-                <BootstrapTable
+                <ToolkitProvider
                     keyField="id"
                     data={showDataComments(row)}
                     columns={[
@@ -111,12 +114,27 @@ function Posts() {
                             sort: true,
                         }
                     ]}
-                    bordered={true}
-                    bootstrap4={true}
-                    noDataIndication="Não há dados"
-                    condensed={true}
-                    rowStyle={{ backgroundColor: 'lightgray', border: '2px solid black' }}
-                />
+                    search
+                >
+                    {props => (
+                        <>
+                            <SearchBar
+                                {...props.searchProps}
+                                style={{ color: 'black', marginLeft: '3px', width: '99.5%' }}
+                                placeholder="Pesquise os comentários"
+                                delay={250}
+                            />
+                            <BootstrapTable
+                                {...props.baseProps}
+                                bordered={true}
+                                bootstrap4={true}
+                                noDataIndication="Não há dados"
+                                condensed={true}
+                                rowStyle={{ backgroundColor: 'lightgray', border: '2px solid black' }}
+                            />
+                        </>
+                    )}
+                </ToolkitProvider>
             </>
         ),
         showExpandColumn: true,
@@ -155,7 +173,7 @@ function Posts() {
         renderer: row => (
             <>
                 <h2>Posts feitos</h2>
-                <BootstrapTable
+                <ToolkitProvider
                     className="test"
                     keyField="id"
                     data={showDataPosts(row)}
@@ -179,14 +197,29 @@ function Posts() {
                             sort: true,
                         }
                     ]}
-                    expandRow={expandInternalRow}
-                    bordered={true}
-                    bootstrap4={true}
-                    noDataIndication="Não há dados"
-                    condensed={true}
-                    rowStyle={{ backgroundColor: 'lightgray', border: '2px solid black' }}
-                    pagination={paginationFactory(options)}
-                />
+                    search
+                >
+                    {props => (
+                        <>
+                            <SearchBar
+                                {...props.searchProps}
+                                style={{ color: 'black', marginLeft: '3px', width: '99.5%' }}
+                                placeholder="Pesquise os posts"
+                                delay={250}
+                            />
+                            <BootstrapTable
+                                {...props.baseProps}
+                                expandRow={expandInternalRow}
+                                bordered={true}
+                                bootstrap4={true}
+                                noDataIndication="Não há dados"
+                                condensed={true}
+                                rowStyle={{ backgroundColor: 'lightgray', border: '2px solid black' }}
+                                pagination={paginationFactory(options)}
+                            />
+                        </>
+                    )}
+                </ToolkitProvider>
             </>
         ),
         showExpandColumn: true,
@@ -215,7 +248,7 @@ function Posts() {
             {!loading &&
                 <div className="posts">
                     <h2>Usuários</h2>
-                    <BootstrapTable
+                    <ToolkitProvider
                         keyField="id"
                         data={data}
                         columns={[
@@ -238,14 +271,31 @@ function Posts() {
                                 sort: true,
                             }
                         ]}
-                        expandRow={expandRow}
-                        bordered={false}
-                        bootstrap4={true}
-                        noDataIndication="Não há dados"
-                        condensed={true}
-                        rowStyle={{ backgroundColor: 'lightgray', border: '2px solid black' }}
-                        pagination={paginationFactory(options)}
-                    />
+                        search
+                    >
+                        {props => (
+                            <>
+                                <SearchBar
+                                    {...props.searchProps}
+                                    style={{ color: 'black', marginLeft: '3px', width: '99.5%' }}
+                                    placeholder="Pesquise os usuários"
+                                    delay={250}
+                                />
+                                <BootstrapTable
+                                    {...props.baseProps}
+                                    expandRow={expandRow}
+                                    bordered={false}
+                                    bootstrap4={true}
+                                    noDataIndication="Não há dados"
+                                    condensed={true}
+                                    rowStyle={{ backgroundColor: 'lightgray', border: '2px solid black' }}
+                                    pagination={paginationFactory(options)}
+                                />
+                            </>
+                        )
+                        }
+                    </ToolkitProvider>
+
                 </div>
             }
         </>

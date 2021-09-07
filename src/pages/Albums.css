@@ -18,3 +18,7 @@
     margin: 3px !important;
     padding: 3px !important;
 }
+
+.albums .sr-only {
+    display: none !important;
+}
